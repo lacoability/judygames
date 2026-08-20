@@ -37,6 +37,10 @@
   --uno-green: #22a15c;
   --uno-blue: #2b6fd4;
 
+  --wordle-correct: #4a934a;
+  --wordle-present: #c9a227;
+  --wordle-absent: #3a3a4c;
+
   /* Felt table */
   --felt-hi: #2f8f66;
   --felt-mid: #1a6046;

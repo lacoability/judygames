@@ -1,0 +1,71 @@
+.tile {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: white;
+  border: 2px solid var(--color-surface-raised);
+  border-radius: 6px;
+  background: transparent;
+  user-select: none;
+}
+
+.filled {
+  border-color: rgba(255, 255, 255, 0.45);
+  animation: pop 0.12s ease;
+}
+
+.correct,
+.present,
+.absent {
+  border-color: transparent;
+  animation: flipIn 0.45s ease both;
+}
+
+.correct {
+  background: var(--wordle-correct);
+}
+
+.present {
+  background: var(--wordle-present);
+}
+
+.absent {
+  background: var(--wordle-absent);
+}
+
+@keyframes flipIn {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filled,
+  .correct,
+  .present,
+  .absent {
+    animation: none;
+  }
+}

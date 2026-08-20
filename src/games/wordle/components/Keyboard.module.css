@@ -1,0 +1,61 @@
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 480px;
+  padding: 0 4px calc(6px + var(--safe-bottom));
+}
+
+.row {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.key {
+  flex: 1;
+  min-width: 0;
+  height: 46px;
+  border: none;
+  border-radius: 6px;
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.key:active:not(:disabled) {
+  filter: brightness(1.15);
+}
+
+.key:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.wide {
+  flex: 1.6;
+  font-size: 0.7rem;
+}
+
+.correct {
+  background: var(--wordle-correct);
+  color: white;
+}
+
+.present {
+  background: var(--wordle-present);
+  color: white;
+}
+
+.absent {
+  background: #24242f;
+  color: rgba(255, 255, 255, 0.4);
+}

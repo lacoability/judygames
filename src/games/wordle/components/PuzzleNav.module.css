@@ -1,0 +1,68 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.arrow {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.label {
+  border: none;
+  background: none;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  min-width: 140px;
+  justify-content: center;
+}
+
+.won {
+  color: var(--wordle-correct);
+}
+
+.lost {
+  color: var(--color-accent);
+}
+
+.jumpForm {
+  min-width: 140px;
+  display: flex;
+  justify-content: center;
+}
+
+.jumpInput {
+  width: 100px;
+  text-align: center;
+  background: var(--color-surface-raised);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.3rem 0.4rem;
+}
