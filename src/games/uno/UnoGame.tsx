@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react'
+import { useNavigate } from 'react-router-dom'
 import type { Card, Color, GameState, VariantConfig } from './engine/types'
 import { DEFAULT_VARIANTS } from './engine/types'
 import { initGame } from './engine/deal'
@@ -7,6 +8,8 @@ import { getPlayableCards, isJumpInEligible } from './engine/rules'
 import { nextPlayerIndex } from './engine/turn'
 import { checkUnoCallRequired } from './engine/uno-call'
 import { decideBotMove } from './bot/botAI'
+import { useGameStats } from '../../shared/hooks/useGameStats'
+import { ConfirmModal } from '../../shared/components/ConfirmModal'
 import { VariantSettingsPanel } from './components/VariantSettingsPanel'
 import { PlayerHandFan } from './components/PlayerHandFan'
 import { OpponentHandBadge } from './components/OpponentHandBadge'
@@ -61,18 +64,23 @@ function buildPlayers(botCount: number) {
 type PendingChoice = { kind: 'color'; card: Card; jumpIn: boolean } | { kind: 'swapTarget'; card: Card } | null
 
 export function UnoGame() {
+  const navigate = useNavigate()
   const [screen, setScreen] = useState<'setup' | 'table'>('setup')
   const [variants, setVariants] = useState<VariantConfig>(DEFAULT_VARIANTS)
   const [botCount, setBotCount] = useState(3)
   const [gameState, setGameState] = useState<GameState | null>(null)
   const [pending, setPending] = useState<PendingChoice>(null)
   const [flight, setFlight] = useState<Flight | null>(null)
+  const [confirmExitOpen, setConfirmExitOpen] = useState(false)
 
   const seatRefs = useRef(new Map<string, HTMLElement>())
   const handRef = useRef<HTMLDivElement>(null)
   const discardRef = useRef<HTMLDivElement>(null)
   const lastTopIdRef = useRef<string | null>(null)
   const flightSeq = useRef(0)
+  const statsRecordedRef = useRef(false)
+
+  const { stats, record } = useGameStats('wild-cards')
 
   function dispatch(action: GameAction) {
     setGameState((s) => (s ? gameReducer(s, action) : s))
@@ -83,8 +91,17 @@ export function UnoGame() {
     setPending(null)
     setFlight(null)
     lastTopIdRef.current = null
+    statsRecordedRef.current = false
     setScreen('table')
   }
+
+  // Records exactly once per finished game — win/loss is only known once,
+  // and gameState keeps re-rendering with status: 'won' until Play Again.
+  useEffect(() => {
+    if (!gameState || gameState.status !== 'won' || statsRecordedRef.current) return
+    statsRecordedRef.current = true
+    record(gameState.winnerId === HUMAN_ID)
+  }, [gameState, record])
 
   const clearFlight = useCallback(() => setFlight(null), [])
 
@@ -158,6 +175,7 @@ export function UnoGame() {
         botCount={botCount}
         onBotCountChange={setBotCount}
         onStart={startGame}
+        stats={stats}
       />
     )
   }
@@ -240,6 +258,17 @@ export function UnoGame() {
     >
       <EventLog log={gameState.log} players={gameState.players} />
 
+      {gameState.status === 'in-progress' && (
+        <button
+          type="button"
+          className={styles.exitButton}
+          onClick={() => setConfirmExitOpen(true)}
+          aria-label="Leave game"
+        >
+          ✕
+        </button>
+      )}
+
       <div
         className={styles.seats}
         style={{ justifyContent: opponents.length === 1 ? 'center' : 'space-between' }}
@@ -321,7 +350,16 @@ export function UnoGame() {
         open={gameState.status === 'won'}
         winnerName={gameState.players.find((p) => p.id === gameState.winnerId)?.name ?? null}
         playerWon={gameState.winnerId === HUMAN_ID}
+        stats={stats}
         onPlayAgain={startGame}
+      />
+      <ConfirmModal
+        open={confirmExitOpen}
+        title="Leave game?"
+        message="Your progress in this hand will be lost."
+        confirmLabel="Leave"
+        onConfirm={() => navigate('/')}
+        onCancel={() => setConfirmExitOpen(false)}
       />
     </div>
   )

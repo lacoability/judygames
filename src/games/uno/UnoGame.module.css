@@ -31,6 +31,29 @@
   visibility: hidden;
 }
 
+.exitButton {
+  position: absolute;
+  top: calc(0.55rem + var(--safe-top));
+  left: calc(0.55rem + var(--safe-left));
+  z-index: 20;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.32);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.exitButton:active {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 /* Opponents hug the edges so they read as seated around a circle with the
    player at the bottom — left seat, top seat, right seat, in play order. */
 .seats {

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { StackingMode, VariantConfig } from '../engine/types'
 import { Button } from '../../../shared/components/Button'
+import { winPercentage, type GameStats } from '../../../shared/utils/stats'
 import styles from './VariantSettingsPanel.module.css'
 
 const STACKING_OPTIONS: { value: StackingMode; label: string }[] = [
@@ -36,6 +37,7 @@ interface VariantSettingsPanelProps {
   botCount: number
   onBotCountChange: (count: number) => void
   onStart: () => void
+  stats: GameStats
 }
 
 export function VariantSettingsPanel({
@@ -44,7 +46,10 @@ export function VariantSettingsPanel({
   botCount,
   onBotCountChange,
   onStart,
+  stats,
 }: VariantSettingsPanelProps) {
+  const hasPlayed = stats.wins + stats.losses > 0
+
   return (
     <div className={styles.screen}>
       <header className={styles.header}>
@@ -53,6 +58,27 @@ export function VariantSettingsPanel({
           Back
         </Link>
       </header>
+
+      {hasPlayed && (
+        <div className={styles.record}>
+          <div className={styles.recordStat}>
+            <div className={styles.recordValue}>{stats.wins}</div>
+            <div className={styles.recordLabel}>Wins</div>
+          </div>
+          <div className={styles.recordStat}>
+            <div className={styles.recordValue}>{winPercentage(stats)}%</div>
+            <div className={styles.recordLabel}>Win rate</div>
+          </div>
+          <div className={styles.recordStat}>
+            <div className={styles.recordValue}>{stats.currentStreak}</div>
+            <div className={styles.recordLabel}>Streak</div>
+          </div>
+          <div className={styles.recordStat}>
+            <div className={styles.recordValue}>{stats.bestStreak}</div>
+            <div className={styles.recordLabel}>Best</div>
+          </div>
+        </div>
+      )}
 
       <div className={styles.section}>
         <span className={styles.sectionTitle}>Players</span>
