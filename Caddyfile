@@ -1,0 +1,13 @@
+yourdomain.com {
+    root * /srv
+    file_server
+    encode gzip
+
+    @sw path /sw.js
+    header @sw Cache-Control "no-cache"
+
+    @manifest path /manifest.json
+    header @manifest Content-Type "application/manifest+json"
+
+    try_files {path} /index.html
+}
