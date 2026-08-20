@@ -1,0 +1,173 @@
+.card {
+  position: relative;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: var(--card-face);
+  border-radius: 11%/7.5%;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition:
+    transform 0.14s ease,
+    box-shadow 0.14s ease,
+    filter 0.14s ease;
+}
+
+/* Each size sets the box plus the glyph scale everything inside keys off. */
+.sm {
+  width: 42px;
+  height: 62px;
+  --glyph: 19px;
+  --pad: 3px;
+}
+
+/* The piles across the table — the visual anchor of the play area. */
+.md {
+  width: 80px;
+  height: 117px;
+  --glyph: 40px;
+  --pad: 6px;
+}
+
+.lg {
+  width: 78px;
+  height: 114px;
+  --glyph: 38px;
+  --pad: 5.5px;
+}
+
+/* Hand cards sit closest to the player, so they read largest. */
+.xl {
+  width: 88px;
+  height: 128px;
+  --glyph: 43px;
+  --pad: 6px;
+}
+
+.panel {
+  position: absolute;
+  inset: var(--pad);
+  border-radius: 9%/6%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  --ink: #333;
+}
+
+.wildPanel {
+  background: conic-gradient(
+    from 45deg,
+    var(--uno-red) 0deg 90deg,
+    var(--uno-blue) 90deg 180deg,
+    var(--uno-green) 180deg 270deg,
+    var(--uno-yellow) 270deg 360deg
+  );
+  --ink: #2b2b2b;
+}
+
+/* The signature tilted white oval behind the value. */
+.oval {
+  position: absolute;
+  width: 124%;
+  height: 58%;
+  background: var(--card-face);
+  border-radius: 50%;
+  transform: rotate(-24deg);
+}
+
+.centerGlyph {
+  position: relative;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ink);
+  -webkit-text-stroke: 0.02em rgba(0, 0, 0, 0.18);
+}
+
+.centerGlyphDark {
+  color: #2b2b2b;
+}
+
+/* Four-colour wheel for plain wild cards. */
+.wildWheel {
+  position: relative;
+  width: 46%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 45deg,
+    var(--uno-red) 0deg 90deg,
+    var(--uno-blue) 90deg 180deg,
+    var(--uno-green) 180deg 270deg,
+    var(--uno-yellow) 270deg 360deg
+  );
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+}
+
+/* Distinguishes 6 from 9 when the corner glyph is upside down. */
+.underlined {
+  text-decoration: underline;
+  text-underline-offset: 0.1em;
+  text-decoration-thickness: 0.07em;
+}
+
+.corner {
+  position: absolute;
+  font-size: calc(var(--glyph) * 0.42);
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.cornerTop {
+  top: 5%;
+  left: 7%;
+}
+
+.cornerBottom {
+  bottom: 5%;
+  right: 7%;
+  transform: rotate(180deg);
+}
+
+/* Card back: dark panel with the same oval motif. */
+.faceDown {
+  background: var(--card-back);
+}
+
+.backPanel {
+  position: absolute;
+  inset: var(--pad);
+  border-radius: 9%/6%;
+  background: linear-gradient(150deg, #2b3350, #171d2c 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.backOval {
+  width: 116%;
+  height: 46%;
+  border-radius: 50%;
+  background: linear-gradient(140deg, var(--color-accent), #b8323c);
+  transform: rotate(-24deg);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12);
+}
+
+/* Unplayable cards recede without turning muddy — desaturate, don't darken much. */
+.dimmed {
+  filter: grayscale(0.4) brightness(0.9);
+  opacity: 0.78;
+}
+
+button.card:active:not(:disabled) {
+  box-shadow: var(--shadow-card-lift);
+}
+
+.selected {
+  box-shadow:
+    var(--shadow-card-lift),
+    0 0 0 3px #fff;
+}

@@ -1,0 +1,129 @@
+.table {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Felt: light pooled toward the centre of play, falling off to a dark rail.
+     The palette itself is swapped per active colour and eases between them. */
+  background:
+    radial-gradient(ellipse 78% 46% at 50% 40%, var(--felt-hi) 0%, var(--felt-mid) 46%, var(--felt-lo) 78%),
+    var(--felt-edge);
+  transition:
+    --felt-hi 850ms ease,
+    --felt-mid 850ms ease,
+    --felt-lo 850ms ease,
+    --felt-edge 850ms ease;
+}
+
+/* Vignette + a faint weave keep the felt from reading as flat colour. */
+.table::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.014) 0 2px, transparent 2px 4px),
+    radial-gradient(ellipse 90% 62% at 50% 42%, transparent 45%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.seats {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: calc(0.5rem + var(--safe-top)) 0.6rem 0;
+}
+
+.play {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  min-height: 0;
+  /* Nudges the piles below dead centre — the table reads as receding away. */
+  padding-top: 30px;
+}
+
+/* The "deal zone" — an inset ellipse that anchors the piles to the table. */
+.playRing {
+  position: absolute;
+  width: min(78vw, 310px);
+  height: 200px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow:
+    inset 0 0 60px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 12px rgba(255, 255, 255, 0.022);
+}
+
+.piles {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.hand {
+  position: relative;
+  z-index: 1;
+  padding-bottom: calc(6px + var(--safe-bottom));
+}
+
+/* A darker rail under the hand: the player's own edge of the table. Neutral
+   black so it works with every felt colour. */
+.hand::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 168px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+}
+
+.handBar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.85rem 0.15rem;
+  min-height: 36px;
+}
+
+.unoButton {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.15rem;
+  background: linear-gradient(160deg, #ff6b6b, #d92d3f);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  padding: 0.35rem 1.1rem;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(217, 45, 63, 0.5);
+  animation: callPulse 1.1s ease-in-out infinite;
+}
+
+@keyframes callPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}

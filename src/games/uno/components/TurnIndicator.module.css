@@ -1,0 +1,30 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.22rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+}
+
+.yours {
+  background: rgba(255, 82, 82, 0.9);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-weight: 700;
+}
+
+.arrow {
+  display: inline-block;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.reversed {
+  transform: scaleX(-1);
+}

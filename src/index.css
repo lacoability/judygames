@@ -1,0 +1,98 @@
+/* Registering the felt colours as typed custom properties is what lets the
+   table's gradient animate between palettes — plain custom properties snap.
+   Initial values are the default green felt, used anywhere outside the table. */
+@property --felt-hi {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #2f8f66;
+}
+@property --felt-mid {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #1a6046;
+}
+@property --felt-lo {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #0e3c2c;
+}
+@property --felt-edge {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #071d16;
+}
+
+:root {
+  --color-bg: #14141f;
+  --color-surface: #23233a;
+  --color-surface-raised: #30304d;
+  --color-text: #f4f4f9;
+  --color-text-muted: #a6a6bf;
+  --color-accent: #ff5252;
+  --color-accent-2: #6c5ce7;
+
+  /* Card face colors — slightly deepened so white glyphs stay legible. */
+  --uno-red: #d63b3b;
+  --uno-yellow: #e8b52c;
+  --uno-green: #22a15c;
+  --uno-blue: #2b6fd4;
+
+  /* Felt table */
+  --felt-hi: #2f8f66;
+  --felt-mid: #1a6046;
+  --felt-lo: #0e3c2c;
+  --felt-edge: #071d16;
+
+  --card-face: #fbfbf6;
+  --card-back: #1d2333;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+
+  --shadow-card: 0 5px 12px rgba(0, 0, 0, 0.45);
+  --shadow-card-lift: 0 12px 22px rgba(0, 0, 0, 0.55);
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+#root {
+  min-height: 100dvh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+}

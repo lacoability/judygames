@@ -1,0 +1,62 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.16s ease;
+}
+
+.dialog,
+.sheet {
+  background: linear-gradient(165deg, var(--color-surface-raised), var(--color-surface) 65%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.55);
+}
+
+.dialog {
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin: auto;
+  max-width: min(90vw, 400px);
+  width: 100%;
+  animation: popIn 0.18s ease;
+}
+
+.sheet {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 1.35rem 1.25rem calc(1.35rem + var(--safe-bottom));
+  width: 100%;
+  max-width: 480px;
+  animation: slideUp 0.2s ease;
+}
+
+/* Shared heading for every sheet/dialog so they stay consistent. */
+.title {
+  margin: 0 0 1rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(18px);
+    opacity: 0.6;
+  }
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.94);
+    opacity: 0;
+  }
+}

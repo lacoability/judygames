@@ -1,0 +1,62 @@
+.wrap {
+  position: relative;
+  width: 80px;
+  height: 117px;
+}
+
+.glow {
+  position: absolute;
+  inset: -26px;
+  border-radius: 50%;
+  filter: blur(18px);
+  opacity: 0.22;
+  transition: background-color 800ms ease;
+}
+
+.under1,
+.under2,
+.top {
+  position: absolute;
+  inset: 0;
+}
+
+.under1 {
+  transform: rotate(-7deg);
+  opacity: 0.85;
+}
+
+.under2 {
+  transform: rotate(6deg);
+  opacity: 0.6;
+}
+
+.top {
+  animation: land 0.22s ease-out;
+}
+
+/* Held back while the played card is still flying in from a seat. */
+.hidden {
+  visibility: hidden;
+}
+
+@keyframes land {
+  from {
+    transform: translateY(-14px) scale(1.06) rotate(-4deg);
+    opacity: 0.4;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.colorDot {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+}

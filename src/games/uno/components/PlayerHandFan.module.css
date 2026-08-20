@@ -1,0 +1,27 @@
+.track {
+  position: relative;
+  /* Card height + rotation dip + the lift a playable card rides at. */
+  height: 164px;
+  width: 100%;
+}
+
+.card {
+  position: absolute;
+  /* Sits off the bottom so a rotated card's low corner still clears the edge. */
+  bottom: 18px;
+  /* Rotate about the bottom edge so the fan splays like a held hand. */
+  transform-origin: 50% 100%;
+}
+
+.card:active {
+  transform: translateY(-30px) rotate(0deg) scale(1.04) !important;
+  z-index: 99 !important;
+}
+
+/* A card playable out of turn gets a soft halo so it reads as special. */
+.jumpable {
+  box-shadow:
+    var(--shadow-card),
+    0 0 0 2px rgba(255, 255, 255, 0.75),
+    0 0 14px 2px rgba(255, 230, 120, 0.55);
+}
