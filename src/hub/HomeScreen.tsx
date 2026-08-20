@@ -8,7 +8,7 @@ export function HomeScreen() {
     <div className={styles.screen}>
       <header className={styles.header}>
         <div>
-          <h1 className={styles.title}>Card Hub</h1>
+          <h1 className={styles.title}>Game Hub</h1>
           <p className={styles.subtitle}>Pick a table</p>
         </div>
         <Link to="/settings" className={styles.settingsLink} aria-label="Settings">

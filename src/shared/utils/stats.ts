@@ -8,7 +8,7 @@ export interface GameStats {
 const EMPTY_STATS: GameStats = { wins: 0, losses: 0, currentStreak: 0, bestStreak: 0 }
 
 function storageKey(gameId: string): string {
-  return `card-hub:stats:${gameId}`
+  return `game-hub:stats:${gameId}`
 }
 
 export function loadStats(gameId: string): GameStats {

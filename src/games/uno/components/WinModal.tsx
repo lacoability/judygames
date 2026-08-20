@@ -39,7 +39,7 @@ export function WinModal({ open, winnerName, playerWon, stats, onPlayAgain }: Wi
       <div className={styles.actions}>
         <Button onClick={onPlayAgain}>Play Again</Button>
         <Link to="/" className={styles.backLink}>
-          Back to Card Hub
+          Back to Game Hub
         </Link>
       </div>
     </Modal>

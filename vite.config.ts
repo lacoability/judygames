@@ -11,8 +11,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'Card Hub',
-        short_name: 'Card Hub',
+        name: 'Game Hub',
+        short_name: 'Game Hub',
         description: 'A collection of casual games, playable offline.',
         theme_color: '#1e1e2e',
         background_color: '#1e1e2e',

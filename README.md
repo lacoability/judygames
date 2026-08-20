@@ -1,4 +1,4 @@
-# Card Hub
+# Game Hub
 
 A mobile-first Progressive Web App that hosts a collection of casual games,
 playable offline once installed. The first game is **Wild Cards**, a

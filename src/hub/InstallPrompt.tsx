@@ -3,7 +3,7 @@ import { useInstallPrompt } from '../shared/hooks/useInstallPrompt'
 import { Button } from '../shared/components/Button'
 import styles from './InstallPrompt.module.css'
 
-const DISMISSED_KEY = 'card-hub:install-prompt-dismissed'
+const DISMISSED_KEY = 'game-hub:install-prompt-dismissed'
 
 export function InstallPrompt() {
   const { installed, canPromptInstall, promptInstall, isIOS } = useInstallPrompt()
@@ -21,7 +21,7 @@ export function InstallPrompt() {
       <span className={styles.text}>
         {isIOS
           ? 'Tap the Share icon, then "Add to Home Screen" to install.'
-          : 'Install Card Hub for quick, offline access.'}
+          : 'Install Game Hub for quick, offline access.'}
       </span>
       <div className={styles.actions}>
         {canPromptInstall && (

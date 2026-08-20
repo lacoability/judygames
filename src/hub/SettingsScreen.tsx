@@ -10,7 +10,7 @@ export function SettingsScreen() {
           Back
         </Link>
       </header>
-      <p style={{ color: 'var(--color-text-muted)' }}>Card Hub v0.0.0</p>
+      <p style={{ color: 'var(--color-text-muted)' }}>Game Hub v0.0.0</p>
     </div>
   )
 }
