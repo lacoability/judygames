@@ -1,0 +1,62 @@
+.ring {
+  position: absolute;
+  width: min(84vw, 320px);
+  height: 200px;
+  pointer-events: none;
+  overflow: visible;
+  /* Plays once on mount; the parent remounts this on every reverse. */
+  animation: flash 700ms ease-out;
+}
+
+.track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 13;
+  vector-effect: non-scaling-stroke;
+}
+
+.clockwise {
+  animation: marchForward 2.6s linear infinite;
+}
+
+.counter {
+  animation: marchBack 2.6s linear infinite;
+}
+
+.arrow {
+  fill: rgba(255, 255, 255, 0.5);
+}
+
+/* An SVG ellipse is drawn clockwise, so a shrinking offset walks the dashes
+   the same way play is moving. */
+@keyframes marchForward {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+
+@keyframes marchBack {
+  to {
+    stroke-dashoffset: 18;
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+  }
+  100% {
+    opacity: 1;
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring,
+  .clockwise,
+  .counter {
+    animation: none;
+  }
+}

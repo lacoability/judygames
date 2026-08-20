@@ -31,14 +31,15 @@
   visibility: hidden;
 }
 
+/* Opponents hug the edges so they read as seated around a circle with the
+   player at the bottom — left seat, top seat, right seat, in play order. */
 .seats {
   position: relative;
   z-index: 1;
   display: flex;
-  justify-content: center;
   align-items: flex-start;
-  gap: 0.5rem;
-  padding: calc(0.5rem + var(--safe-top)) 0.6rem 0;
+  padding: calc(0.5rem + var(--safe-top)) calc(0.35rem + var(--safe-left)) 0
+    calc(0.35rem + var(--safe-right));
 }
 
 .play {

@@ -4,6 +4,7 @@ import { DEFAULT_VARIANTS } from './engine/types'
 import { initGame } from './engine/deal'
 import { gameReducer, type GameAction } from './engine/gameReducer'
 import { getPlayableCards, isJumpInEligible } from './engine/rules'
+import { nextPlayerIndex } from './engine/turn'
 import { checkUnoCallRequired } from './engine/uno-call'
 import { decideBotMove } from './bot/botAI'
 import { VariantSettingsPanel } from './components/VariantSettingsPanel'
@@ -17,14 +18,18 @@ import { TurnIndicator } from './components/TurnIndicator'
 import { EventLog } from './components/EventLog'
 import { WinModal } from './components/WinModal'
 import { DrawCallout } from './components/DrawCallout'
+import { DirectionRing } from './components/DirectionRing'
 import { FlyingCard, type Point } from './components/FlyingCard'
 import styles from './UnoGame.module.css'
 
 const HUMAN_ID = 'human'
 // Bots pause an unpredictable beat before acting, so play feels dealt rather
-// than metronomic.
-const BOT_DELAY_MIN_MS = 500
-const BOT_DELAY_MAX_MS = 1500
+// than metronomic — and slowly enough to follow what just happened.
+const BOT_DELAY_MIN_MS = 1000
+const BOT_DELAY_MAX_MS = 4000
+
+/** Seated left, top, then right — matching the clockwise order of play. */
+const BOT_NAMES = ['Phoebe', 'Milly', 'Libby']
 
 /** Felt palettes per colour: bright centre → mid → dark falloff → table edge. */
 const FELT: Record<Color, { hi: string; mid: string; lo: string; edge: string }> = {
@@ -49,7 +54,7 @@ function centreOf(el: Element): Point {
 function buildPlayers(botCount: number) {
   return [
     { id: HUMAN_ID, name: 'You', isBot: false },
-    ...Array.from({ length: botCount }, (_, i) => ({ id: `bot${i + 1}`, name: `Bot ${i + 1}`, isBot: true })),
+    ...Array.from({ length: botCount }, (_, i) => ({ id: `bot${i + 1}`, name: BOT_NAMES[i], isBot: true })),
   ]
 }
 
@@ -213,6 +218,9 @@ export function UnoGame() {
 
   // Seats arc away from the centre: the middle seat sits highest.
   const seatMid = (opponents.length - 1) / 2
+  // Who is up after the current player, ignoring any effect the card in play
+  // might have — this is the seating order, which is what gets confusing.
+  const nextUpId = gameState.players[nextPlayerIndex(gameState)].id
 
   const felt = FELT[gameState.activeColor]
 
@@ -232,11 +240,15 @@ export function UnoGame() {
     >
       <EventLog log={gameState.log} players={gameState.players} />
 
-      <div className={styles.seats}>
+      <div
+        className={styles.seats}
+        style={{ justifyContent: opponents.length === 1 ? 'center' : 'space-between' }}
+      >
         {opponents.map((p, i) => (
           <div
             key={p.id}
-            style={{ marginTop: `${Math.abs(i - seatMid) * 16}px` }}
+            // Outer seats sit lower, as if further round the curve of the table.
+            style={{ marginTop: `${Math.abs(i - seatMid) * 26}px` }}
             ref={(el) => {
               if (el) seatRefs.current.set(p.id, el)
               else seatRefs.current.delete(p.id)
@@ -245,6 +257,7 @@ export function UnoGame() {
             <OpponentHandBadge
               player={p}
               isTurn={currentPlayer.id === p.id}
+              isNext={p.id === nextUpId && currentPlayer.id !== p.id}
               canChallenge={p.hand.length === 1 && !p.calledUno}
               onChallenge={() => dispatch({ type: 'CHALLENGE_UNO', accusedId: p.id })}
             />
@@ -254,6 +267,8 @@ export function UnoGame() {
 
       <div className={styles.play}>
         <div className={styles.playRing} />
+        {/* Keyed by direction so a reverse remounts it and replays the flash. */}
+        <DirectionRing key={gameState.direction} direction={gameState.direction} />
         {mustDraw && <DrawCallout pendingDraw={gameState.pendingDrawCount} />}
         {/* Kept in flow even while hidden so the piles never shift position. */}
         <div className={mustDraw ? styles.hidden : undefined}>
