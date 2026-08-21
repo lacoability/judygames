@@ -1,24 +1,48 @@
+import { useState } from 'react'
 import { Modal } from '../../../shared/components/Modal'
 import { Button } from '../../../shared/components/Button'
 import modalStyles from '../../../shared/components/Modal.module.css'
 import { StatsPanel } from './StatsPanel'
 import type { WordleStats } from '../storage'
 import type { PuzzleStatus } from '../engine/reducer'
+import { buildShareText, copyToClipboard } from '../share'
 import styles from './ResultModal.module.css'
 
 interface ResultModalProps {
   open: boolean
   status: PuzzleStatus
+  puzzleNumber: number
+  guesses: string[]
   answer: string
-  guessCount: number
   stats: WordleStats
   hasNextPuzzle: boolean
   onNext: () => void
   onClose: () => void
 }
 
-export function ResultModal({ open, status, answer, guessCount, stats, hasNextPuzzle, onNext, onClose }: ResultModalProps) {
+export function ResultModal({
+  open,
+  status,
+  puzzleNumber,
+  guesses,
+  answer,
+  stats,
+  hasNextPuzzle,
+  onNext,
+  onClose,
+}: ResultModalProps) {
   const won = status === 'won'
+  const guessCount = guesses.length
+  const [copied, setCopied] = useState(false)
+
+  async function handleShare() {
+    const text = buildShareText(puzzleNumber, guesses, answer, status)
+    const succeeded = await copyToClipboard(text)
+    if (succeeded) {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    }
+  }
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -31,6 +55,9 @@ export function ResultModal({ open, status, answer, guessCount, stats, hasNextPu
       <StatsPanel stats={stats} highlightGuessCount={won ? guessCount : undefined} />
 
       <div className={styles.actions}>
+        <Button variant="secondary" onClick={handleShare}>
+          {copied ? 'Copied!' : 'Share Result'}
+        </Button>
         {hasNextPuzzle && (
           <Button onClick={onNext}>Next Puzzle</Button>
         )}

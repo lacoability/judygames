@@ -139,8 +139,9 @@ export function WordleGame() {
       <ResultModal
         open={showResult}
         status={state.status}
+        puzzleNumber={puzzleNumber}
+        guesses={state.guesses}
         answer={state.answer}
-        guessCount={state.guesses.length}
         stats={stats}
         hasNextPuzzle={puzzleIndex < TOTAL_PUZZLES - 1}
         onNext={() => goToPuzzle(puzzleIndex + 1)}
