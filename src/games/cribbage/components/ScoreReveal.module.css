@@ -1,0 +1,70 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.title {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.cards {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.starter {
+  margin-left: 0.5rem;
+  box-shadow:
+    var(--shadow-card),
+    0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.noScore {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.breakdown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  animation: lineIn 0.25s ease both;
+}
+
+.line span:last-child {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+@keyframes lineIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.total {
+  font-size: 1.3rem;
+  font-weight: 800;
+}

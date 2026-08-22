@@ -1,0 +1,52 @@
+.wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stack {
+  position: relative;
+  width: 92px;
+  height: 122px;
+}
+
+.back {
+  position: absolute;
+}
+
+/* Laid across the deck at an angle, the way the cut card sits on the table. */
+.starter {
+  position: absolute;
+  left: 12px;
+  top: 6px;
+  transform: rotate(9deg);
+  box-shadow: var(--shadow-card-lift);
+}
+
+.heels {
+  position: absolute;
+  bottom: -1.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(160deg, #ff6b6b, #d92d3f);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(217, 45, 63, 0.5);
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  from {
+    transform: translateX(-50%) scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+}

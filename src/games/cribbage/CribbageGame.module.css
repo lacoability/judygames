@@ -1,0 +1,184 @@
+.setup {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: calc(1.5rem + var(--safe-top)) 1.25rem calc(1.5rem + var(--safe-bottom));
+  background:
+    radial-gradient(ellipse 78% 46% at 50% 40%, var(--felt-hi) 0%, var(--felt-mid) 46%, var(--felt-lo) 78%),
+    var(--felt-edge);
+}
+
+.setupExit {
+  position: absolute;
+  top: calc(0.55rem + var(--safe-top));
+  left: calc(0.55rem + var(--safe-left));
+  z-index: 20;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.32);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.setupCard {
+  width: 100%;
+  max-width: 340px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow-card-lift);
+}
+
+.setupTitle {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.setupBlurb {
+  margin: 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.setupStats {
+  display: flex;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.setupStats > div {
+  flex: 1;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.3rem;
+}
+
+.setupStatValue {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.setupStatLabel {
+  font-size: 0.62rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.1rem;
+}
+
+.table {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 78% 46% at 50% 40%, var(--felt-hi) 0%, var(--felt-mid) 46%, var(--felt-lo) 78%),
+    var(--felt-edge);
+}
+
+/* Sits beside the opponent rather than over the board, which now owns the top strip. */
+.exitButton {
+  position: absolute;
+  top: 0.3rem;
+  right: calc(0.55rem + var(--safe-right));
+  z-index: 20;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.32);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.exitButton:active {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* No safe-area padding here — the peg board above it already clears the notch. */
+.opponentRow {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  padding-top: 0.4rem;
+}
+
+.message {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  padding: 0.3rem 0;
+  min-height: 1.4em;
+}
+
+.play {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  min-height: 0;
+}
+
+/* Deck-and-cut on the left, crib beside it — the table's fixed furniture. */
+.centerRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+}
+
+.hand {
+  position: relative;
+  z-index: 1;
+  padding-bottom: calc(6px + var(--safe-bottom));
+}
+
+.hand::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 168px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+  z-index: -1;
+}
+
+.handBar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.85rem 0.3rem;
+  min-height: 36px;
+}

@@ -1,0 +1,17 @@
+/* Tall enough for a card at full SELECTED_LIFT to clear the top of the track. */
+.track {
+  position: relative;
+  height: 172px;
+  width: 100%;
+}
+
+.card {
+  position: absolute;
+  bottom: 14px;
+  transform-origin: 50% 100%;
+}
+
+.card:active:not(:disabled) {
+  transform: translateY(-26px) rotate(0deg) scale(1.04) !important;
+  z-index: 99 !important;
+}

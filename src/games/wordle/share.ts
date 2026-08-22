@@ -21,7 +21,8 @@ export function buildShareText(puzzleNumber: number, guesses: string[], answer: 
   const grid = rows.join('\n')
   const score = status === 'won' ? String(guesses.length) : 'X'
 
-  return `Wordle #${puzzleNumber}\n\n${grid}\n\nGuesses: ${score}/${MAX_GUESSES}`
+  // Guess count sits below the grid, so the emoji block leads when pasted.
+  return `Word #${puzzleNumber}\n\n${grid}\n\nGuesses: ${score}/${MAX_GUESSES}`
 }
 
 /** navigator.clipboard requires a secure context; falls back to the old execCommand trick otherwise. */
