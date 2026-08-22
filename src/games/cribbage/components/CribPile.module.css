@@ -1,0 +1,23 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.stack {
+  position: relative;
+  height: 62px;
+  width: 66px;
+}
+
+.card {
+  position: absolute;
+  top: 0;
+}
+
+.label {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}

@@ -1,0 +1,141 @@
+.card {
+  position: relative;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: var(--card-face);
+  border-radius: 11%/7.5%;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition:
+    transform 0.14s ease,
+    box-shadow 0.14s ease,
+    filter 0.14s ease;
+}
+
+.sm {
+  width: 42px;
+  height: 62px;
+  --glyph: 20px;
+  --rank-size: 12px;
+  --pad: 3px;
+}
+
+.md {
+  width: 66px;
+  height: 96px;
+  --glyph: 30px;
+  --rank-size: 16px;
+  --pad: 5px;
+}
+
+.lg {
+  width: 78px;
+  height: 114px;
+  --glyph: 36px;
+  --rank-size: 18px;
+  --pad: 5.5px;
+}
+
+.xl {
+  width: 88px;
+  height: 128px;
+  --glyph: 42px;
+  --rank-size: 20px;
+  --pad: 6px;
+}
+
+.panel {
+  position: absolute;
+  inset: var(--pad);
+  border-radius: 9%/6%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.red {
+  color: #c0392b;
+}
+
+.black {
+  color: #23232b;
+}
+
+.centerGlyph {
+  font-size: calc(var(--glyph) * 1.5);
+  line-height: 1;
+}
+
+.corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  gap: 1px;
+}
+
+.cornerTop {
+  top: 6%;
+  left: 8%;
+}
+
+.cornerBottom {
+  bottom: 6%;
+  right: 8%;
+  transform: rotate(180deg);
+}
+
+.rank {
+  font-size: var(--rank-size);
+  font-weight: 800;
+}
+
+.cornerSuit {
+  font-size: calc(var(--rank-size) * 0.85);
+}
+
+/* Card back: dark panel with a diamond motif, distinct from the uno deck's oval. */
+.faceDown {
+  background: var(--card-back);
+}
+
+.backPanel {
+  position: absolute;
+  inset: var(--pad);
+  border-radius: 9%/6%;
+  background: linear-gradient(150deg, #2b3350, #171d2c 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.backDiamond {
+  width: 62%;
+  height: 62%;
+  transform: rotate(45deg);
+  background: linear-gradient(140deg, var(--color-accent-2), #423a8f);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.14);
+  border-radius: 4px;
+}
+
+.dimmed {
+  filter: grayscale(0.4) brightness(0.9);
+  opacity: 0.78;
+}
+
+button.card:active:not(:disabled) {
+  box-shadow: var(--shadow-card-lift);
+}
+
+/* A solid blue ring plus a soft halo. The lift that goes with it is applied as
+   an inline transform by Hand.tsx — setting it here would be overridden. */
+.selected {
+  box-shadow:
+    var(--shadow-card-lift),
+    0 0 0 3px var(--cribbage-select),
+    0 0 16px 3px var(--cribbage-select-glow);
+}

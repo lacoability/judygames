@@ -41,6 +41,10 @@
   --wordle-present: #c9a227;
   --wordle-absent: #3a3a4c;
 
+  /* Selection blue — reads against both the cream card face and the felt. */
+  --cribbage-select: #3d8bfd;
+  --cribbage-select-glow: rgba(61, 139, 253, 0.6);
+
   /* Felt table */
   --felt-hi: #2f8f66;
   --felt-mid: #1a6046;

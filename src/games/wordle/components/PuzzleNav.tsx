@@ -63,7 +63,7 @@ export function PuzzleNav({ puzzleNumber, totalPuzzles, status, onNavigate }: Pu
         </form>
       ) : (
         <button type="button" className={styles.label} onClick={() => setJumpOpen(true)}>
-          Wordle #{puzzleNumber}
+          Word #{puzzleNumber}
           {mark && <span className={mark === '✓' ? styles.won : styles.lost}>{mark}</span>}
         </button>
       )}
